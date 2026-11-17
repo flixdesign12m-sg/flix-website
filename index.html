@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FLIX Link Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Flix Communications – Full services marketing agency, Ho Chi Minh City">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: left-aligned poster column. Logo + stacked condensed headline whose "_" (flix.com.vn heading mark) is a live caret.
+   Links are full-width rows split by hairlines; hover wipes the row in logo violet. White / black / violet only. */
+:root {
+  --bg: #FFFFFF;
+  --ink: #000000;
+  --muted: #7A7A7A;
+  --rule: #E4E4E4;
+  --soft: #F5F5F5;
+  --accent: #4028A0;            /* FLIX logo violet */
+  --brand-a: #3A237D;           /* logo gradient ends */
+  --brand-b: #472EC5;
+  --on-brand: #FFFFFF;
+  --logo-filter: none;
+  --mark: 0, 0, 0;             /* background crop-mark grid, as r,g,b */
+  --mark-alpha: .22;
+  --display: "Barlow Condensed", "Noto Sans JP", "Arial Narrow", system-ui, sans-serif;
+  --body: "Barlow", "Noto Sans JP", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E0C16; --ink: #F3F2F8; --muted: #9A97AA; --rule: #262234; --soft: #17141F;
+    --accent: #9A88F7; --logo-filter: brightness(0) invert(1);
+    --mark: 255, 255, 255; --mark-alpha: .18;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E0C16; --ink: #F3F2F8; --muted: #9A97AA; --rule: #262234; --soft: #17141F;
+  --accent: #9A88F7; --logo-filter: brightness(0) invert(1);
+  --mark: 255, 255, 255; --mark-alpha: .18;
+  color-scheme: dark;
+}
+
+/* Background: a field of print crop marks (+) that breathes in a slow diagonal wave
+   and turns violet around the pointer / finger. */
+#bg { position: fixed; inset: -12px; width: calc(100% + 24px); height: calc(100% + 24px); z-index: 0; pointer-events: none; display: block; filter: blur(2.5px); }
+.wrap { position: relative; z-index: 1; }
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--on-brand); }
+
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ---------- Hero ---------- */
+.hero { display: flex; flex-direction: column; gap: 22px; }
+.logo { display: block; width: 112px; height: auto; filter: var(--logo-filter); }
+.headline {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(46px, 14vw, 68px);
+  line-height: .92;
+  letter-spacing: .005em;
+  text-transform: uppercase;
+}
+.headline .ln { display: block; overflow: hidden; padding-bottom: .04em; }
+.headline .ln > span { display: inline-block; animation: rise .7s var(--ease) both; }
+.headline .ln:nth-child(2) > span { animation-delay: .08s; }
+.headline .ln:nth-child(3) > span { animation-delay: .16s; }
+.caret { color: var(--accent); animation: blink 1.1s steps(1) .9s infinite; }
+@keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes blink { 50% { opacity: 0; } }
+.lede { margin: 0; max-width: 36ch; font-size: 17px; color: var(--muted); }
+
+/* ---------- Language switch ---------- */
+.hero-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.lang {
+  display: flex; gap: 2px; padding: 3px;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--bg);
+}
+.lang button {
+  font: 600 14px/1 var(--display);
+  letter-spacing: .06em;
+  color: var(--muted);
+  background: none; border: 0; border-radius: 999px;
+  min-width: 46px; min-height: 36px; padding: 0 12px;
+  cursor: pointer;
+  transition: color .2s ease, background-color .25s ease;
+}
+.lang button:hover { color: var(--ink); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* Japanese: CJK glyphs are wider and have no caps, so loosen the condensed setting */
+:root:lang(ja) .headline { font-size: clamp(34px, 10.4vw, 54px); line-height: 1.14; letter-spacing: 0; }
+:root:lang(ja) .featured .t { font-size: 25px; line-height: 1.3; letter-spacing: 0; }
+:root:lang(ja) .row-link .t { font-size: 21px; letter-spacing: 0; }
+:root:lang(ja) .lede { line-height: 1.8; font-size: 16px; }
+
+/* ---------- Featured (credentials) ---------- */
+.featured {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 132px;
+  padding: 20px 22px;
+  color: var(--on-brand);
+  background: linear-gradient(135deg, var(--brand-b), var(--brand-a));
+  overflow: hidden;
+  isolation: isolate;
+}
+.featured::after {               /* oversized logo-weight X, cropped, as texture */
+  content: "X";
+  position: absolute;
+  right: -14px; top: -46px;
+  font: 700 200px/1 var(--display);
+  color: rgba(255, 255, 255, .08);
+  z-index: -1;
+  transition: transform .6s var(--ease);
+}
+.featured:hover::after { transform: rotate(-8deg) scale(1.06); }
+.featured .k { display: block; font-size: 14px; opacity: .78; margin-bottom: 2px; }
+.featured .t {
+  display: block;
+  font: 700 30px/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+.go {
+  flex: none;
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--on-brand);
+  color: var(--brand-a);
+  transition: transform .35s var(--ease);
+}
+.go svg { width: 20px; height: 20px; }
+.featured:hover .go { transform: rotate(45deg); }
+
+/* ---------- Link rows ---------- */
+.links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.links li { border-bottom: 1px solid var(--rule); }
+.row-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 4px;
+  isolation: isolate;
+  transition: color .25s ease, padding .35s var(--ease);
+}
+.row-link::before {
+  content: "";
+  position: absolute; inset: 0 -12px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s var(--ease);
+  z-index: -1;
+}
+.row-link .txt { min-width: 0; }
+.row-link .t {
+  display: block;
+  font: 600 24px/1.1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+.row-link .s {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: color .25s ease;
+}
+.row-link .arrow { width: 22px; height: 22px; color: var(--muted); transition: transform .35s var(--ease), color .25s ease; }
+@media (hover: hover) {
+  .row-link:hover { color: var(--on-brand); padding-left: 10px; }
+  .row-link:hover::before { transform: scaleX(1); }
+  .row-link:hover .s, .row-link:hover .arrow { color: var(--on-brand); }
+  .row-link:hover .arrow { transform: translateX(-4px) rotate(-45deg); }
+}
+.row-link:active::before { transform: scaleX(1); }
+.row-link:active { color: var(--on-brand); }
+
+/* ---------- Social ---------- */
+.social { display: flex; flex-wrap: wrap; gap: 10px; }
+.soc {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px 9px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font: 600 16px/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease;
+}
+.soc svg { width: 18px; height: 18px; flex: none; color: var(--accent); transition: color .2s ease; }
+.soc:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.soc:hover svg { color: var(--bg); }
+
+/* ---------- Contact ---------- */
+.contact h2 {
+  margin: 0 0 6px;
+  font: 700 22px/1 var(--display);
+  text-transform: uppercase;
+}
+.contact h2 .u { color: var(--accent); }
+.c-list { margin: 0; }
+.c-row {
+  display: grid;
+  grid-template-columns: 88px 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.c-row dt { font-size: 14px; color: var(--muted); }
+.c-row dd { margin: 0; min-width: 0; font-weight: 500; overflow-wrap: anywhere; }
+.act {
+  font: 600 14px/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  padding: 6px 0 6px 8px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.act:hover { text-decoration: underline; text-underline-offset: 3px; }
+.act.done { color: var(--ink); }
+
+/* ---------- Footer ---------- */
+footer {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+  gap: 8px 16px;
+  font-size: 13px; color: var(--muted);
+}
+footer p { margin: 0; }
+.share {
+  font: 600 14px/1 var(--display);
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--ink);
+  background: var(--soft);
+  border: 0; border-radius: 999px;
+  padding: 9px 14px;
+  cursor: pointer;
+}
+.share:hover { background: var(--ink); color: var(--bg); }
+
+.c-row { align-items: center; }
+.c-row dd a { display: inline-block; padding-block: 6px; }
+@media (max-width: 480px) {
+  .social { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .soc { justify-content: center; min-height: 46px; padding: 10px 6px; font-size: 15px; gap: 6px; }
+  .share { min-height: 44px; }
+}
+@media (max-width: 380px) {
+  .c-row { grid-template-columns: 1fr auto; row-gap: 0; }
+  .c-row dt { grid-column: 1 / -1; }
+  .soc svg { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<main class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="hero-top">
+    <img class="logo" alt="FLIX" width="207" height="85" src="data:image/png;base64,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">
+      <div class="lang" role="group" aria-label="Language" data-i18n-aria="langGroup">
+        <button type="button" id="lang-en" data-lang="en" lang="en" title="English" aria-pressed="true">EN</button>
+        <button type="button" id="lang-ja" data-lang="ja" lang="ja" title="日本語" aria-pressed="false">JP</button>
+        <button type="button" id="lang-fr" data-lang="fr" lang="fr" title="Français" aria-pressed="false">FR</button>
+      </div>
+    </div>
+    <h1 class="headline" aria-label="Full services marketing agency" data-i18n-aria="headline">
+      <span class="ln"><span data-i18n="h1">Full services</span></span>
+      <span class="ln"><span data-i18n="h2">marketing</span></span>
+      <span class="ln"><span><span data-i18n="h3">agency</span><span class="caret">_</span></span></span>
+    </h1>
+    <p class="lede" data-i18n="lede">Campaign ideas, events and production for brands in Vietnam. Based in Ho Chi Minh City.</p>
+  </header>
+
+  <!-- ============ HỒ SƠ NĂNG LỰC — thay href bằng link thật ============ -->
+  <a class="featured" href="#" target="_blank" rel="noopener">
+    <span>
+      <span class="k" data-i18n="credK">Credentials 2026</span>
+      <span class="t" data-i18n-html="credT">View our<br>credentials</span>
+    </span>
+    <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+  </a>
+
+  <!-- ============ LIÊN KẾT ============ -->
+  <nav aria-label="Links" data-i18n-aria="nav">
+    <ul class="links">
+      <li><a class="row-link" href="https://flix.com.vn" target="_blank" rel="noopener">
+        <span class="txt"><span class="t" data-i18n="web">Website</span><span class="s">flix.com.vn</span></span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a></li>
+      <li><a class="row-link" href="https://www.youtube.com/channel/UCJ5_Wjw6qCywBnqVrWjshhg" target="_blank" rel="noopener">
+        <span class="txt"><span class="t" data-i18n="reel">Showreel &amp; work</span><span class="s" data-i18n="reelSub">Campaign videos on YouTube</span></span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a></li>
+      <li><a class="row-link" href="https://www.facebook.com/profile.php?id=61592088262261" target="_blank" rel="noopener">
+        <span class="txt"><span class="t">Facebook</span><span class="s">Flix Communications</span></span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a></li>
+      <li><a class="row-link" href="https://www.linkedin.com/company/phuc-lai-flix-communications-co-ltd/" target="_blank" rel="noopener">
+        <span class="txt"><span class="t">LinkedIn</span><span class="s">Flix Communications</span></span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ LIÊN HỆ ============ -->
+  <section class="contact" aria-labelledby="contact-h">
+    <h2 id="contact-h"><span data-i18n="contact">Contact</span><span class="u">_</span></h2>
+    <dl class="c-list">
+      <div class="c-row">
+        <dt data-i18n="email">Email</dt>
+        <dd><a id="email" href="mailto:business@flix.com.vn">business@flix.com.vn</a></dd>
+        <button class="act" type="button" id="copy-email" data-copy="email" data-i18n="copy">Copy</button>
+      </div>
+      <div class="c-row">
+        <dt data-i18n="office">Office</dt>
+        <dd id="addr" data-i18n="addr">1Bis Pham Ngoc Thach St., Sai Gon Ward, District 1, Ho Chi Minh City, Vietnam</dd>
+        <a class="act" href="https://www.google.com/maps/search/?api=1&amp;query=1Bis%20Ph%E1%BA%A1m%20Ng%E1%BB%8Dc%20Th%E1%BA%A1ch%2C%20S%C3%A0i%20G%C3%B2n%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh" target="_blank" rel="noopener" data-i18n="map">Map</a>
+      </div>
+    </dl>
+  </section>
+
+  <footer>
+    <p>© 2026 Flix Communications<br><span data-i18n="member">Member of CCIFV</span></p>
+    <button class="share" type="button" id="share-page" data-i18n="share">Copy page link</button>
+  </footer>
+</main>
+
+<script>
+/* ---------- Background crop-mark field ---------- */
+(function () {
+  var cv = document.getElementById('bg');
+  var ctx = cv.getContext && cv.getContext('2d');
+  if (!ctx) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var GAP = 40, ARM = 3.6, R = 170;
+  var W = 0, H = 0, dpr = 1, cols = 0, rows = 0, ox = 0, oy = 0;
+  var ink = '0,0,0', accent = '64,40,160', base = .16;
+  var px = -9999, py = -9999, tx = -9999, ty = -9999, glow = 0, glowT = 0;
+  var running = false, raf = 0, t0 = performance.now();
+
+  function rgb(c) {
+    var m = c.match(/^#([0-9a-f]{6})$/i);
+    if (m) { var n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(','); }
+    m = c.match(/\d+(\.\d+)?/g); return m ? m.slice(0, 3).join(',') : '64,40,160';
+  }
+  function readTheme() {
+    var s = getComputedStyle(document.documentElement);
+    ink = (s.getPropertyValue('--mark') || '0,0,0').trim();
+    accent = rgb((s.getPropertyValue('--accent') || '#4028A0').trim());
+    base = parseFloat(s.getPropertyValue('--mark-alpha')) || .15;
+  }
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(W / GAP) + 1; rows = Math.ceil(H / GAP) + 1;
+    ox = (W - (cols - 1) * GAP) / 2; oy = (H - (rows - 1) * GAP) / 2;
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000;
+    px += (tx - px) * .12; py += (ty - py) * .12;
+    glow += (glowT - glow) * .08;
+    ctx.clearRect(0, 0, W, H);
+    var cx = W / 2, narrow = W < 640;
+    ctx.lineWidth = 1.2; ctx.lineCap = 'round';
+    for (var i = 0; i < cols; i++) {
+      var x = ox + i * GAP;
+      /* keep the reading column calm: fainter marks behind the text */
+      var col = narrow ? .45 : Math.min(1, .2 + Math.abs(x - cx) / 460);
+      for (var j = 0; j < rows; j++) {
+        var y = oy + j * GAP;
+        var wave = .5 + .5 * Math.sin(t * .9 - (x + y) * .012);
+        var a = base * col * (.55 + .45 * wave);
+        var s = ARM * (.75 + .25 * wave);
+        var dx = x - px, dy = y - py, d = Math.sqrt(dx * dx + dy * dy);
+        var near = d < R ? (1 - d / R) * glow : 0;
+        if (near > .02) {
+          near = near * near * (3 - 2 * near);
+          s += near * 2.4;
+          ctx.strokeStyle = 'rgba(' + accent + ',' + Math.min(1, a + near * .6).toFixed(3) + ')';
+        } else {
+          ctx.strokeStyle = 'rgba(' + ink + ',' + a.toFixed(3) + ')';
+        }
+        ctx.beginPath();
+        ctx.moveTo(x - s, y); ctx.lineTo(x + s, y);
+        ctx.moveTo(x, y - s); ctx.lineTo(x, y + s);
+        ctx.stroke();
+      }
+    }
+    if (running) raf = requestAnimationFrame(draw);
+  }
+  function start() {
+    if (reduce.matches) { running = false; cancelAnimationFrame(raf); draw(t0); return; }
+    if (!running && !document.hidden) { running = true; raf = requestAnimationFrame(draw); }
+  }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+
+  function point(x, y) { tx = x; ty = y; if (px < -999) { px = x; py = y; } glowT = 1; }
+  window.addEventListener('pointermove', function (e) { point(e.clientX, e.clientY); }, { passive: true });
+  window.addEventListener('pointerdown', function (e) { point(e.clientX, e.clientY); }, { passive: true });
+  window.addEventListener('pointerleave', function () { glowT = 0; });
+  document.addEventListener('mouseleave', function () { glowT = 0; });
+  window.addEventListener('touchend', function () { setTimeout(function () { glowT = 0; }, 600); }, { passive: true });
+
+  window.addEventListener('resize', function () { resize(); if (!running) draw(performance.now()); });
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  var dark = window.matchMedia('(prefers-color-scheme: dark)');
+  function retheme() { readTheme(); if (!running) draw(performance.now()); }
+  (dark.addEventListener ? dark.addEventListener('change', retheme) : dark.addListener(retheme));
+  (reduce.addEventListener ? reduce.addEventListener('change', function () { stop(); start(); }) : 0);
+  new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  readTheme(); resize(); start();
+})();
+
+/* ---------- Languages ---------- */
+var I18N = {
+  en: {
+    langGroup: 'Language', headline: 'Full services marketing agency',
+    h1: 'Full services', h2: 'marketing', h3: 'agency',
+    lede: 'Campaign ideas, events and production for brands in Vietnam. Based in Ho Chi Minh City.',
+    credK: 'Credentials 2026', credT: 'View our<br>credentials',
+    nav: 'Links', web: 'Website', reel: 'Showreel & work', reelSub: 'Campaign videos on YouTube',
+    contact: 'Contact', email: 'Email', office: 'Office',
+    addr: '1Bis Pham Ngoc Thach St., Sai Gon Ward, District 1, Ho Chi Minh City, Vietnam',
+    copy: 'Copy', copied: 'Copied', selected: 'Selected', map: 'Map',
+    member: 'Member of CCIFV', share: 'Copy page link'
+  },
+  ja: {
+    langGroup: '言語', headline: 'フルサービス・マーケティング・エージェンシー',
+    h1: 'フルサービス', h2: 'マーケティング', h3: 'エージェンシー',
+    lede: 'ベトナムのブランドのために、キャンペーンの企画からイベント、制作までを手がけます。拠点はホーチミン市です。',
+    credK: '2026年版', credT: '会社案内を<br>見る',
+    nav: 'リンク', web: 'ウェブサイト', reel: 'ショーリール・実績', reelSub: 'YouTubeでキャンペーン映像を見る',
+    contact: 'お問い合わせ', email: 'メール', office: 'オフィス',
+    addr: '1Bis Pham Ngoc Thach St., Sai Gon Ward, District 1, Ho Chi Minh City, Vietnam',
+    copy: 'コピー', copied: 'コピーしました', selected: '選択しました', map: '地図',
+    member: 'CCIFV 会員', share: 'ページのリンクをコピー'
+  },
+  fr: {
+    langGroup: 'Langue', headline: 'Agence marketing intégrée',
+    h1: 'Agence', h2: 'marketing', h3: 'intégrée',
+    lede: 'Idées de campagne, événements et production pour les marques au Vietnam. Basée à Hô Chi Minh-Ville.',
+    credK: 'Références 2026', credT: 'Voir nos<br>références',
+    nav: 'Liens', web: 'Site web', reel: 'Showreel et projets', reelSub: 'Nos campagnes en vidéo sur YouTube',
+    contact: 'Contact', email: 'E-mail', office: 'Bureau',
+    addr: '1Bis rue Pham Ngoc Thach, quartier Sai Gon, 1er arrondissement, Hô Chi Minh-Ville, Vietnam',
+    copy: 'Copier', copied: 'Copié', selected: 'Sélectionné', map: 'Plan',
+    member: 'Membre de la CCIFV', share: 'Copier le lien de la page'
+  }
+};
+var LANG = 'en';
+function t(key) { return (I18N[LANG] && I18N[LANG][key]) || I18N.en[key] || ''; }
+
+(function () {
+  var KEY = 'flix-lang';
+  function pick() {
+    var h = (location.hash || '').slice(1).toLowerCase();
+    if (I18N[h]) return h;
+    try { var saved = localStorage.getItem(KEY); if (I18N[saved]) return saved; } catch (e) {}
+    var prefs = navigator.languages || [navigator.language || 'en'];
+    for (var i = 0; i < prefs.length; i++) {
+      var code = String(prefs[i]).slice(0, 2).toLowerCase();
+      if (I18N[code]) return code;
+    }
+    return 'en';
+  }
+  function replay() {
+    document.querySelectorAll('.headline .ln > span').forEach(function (el) {
+      el.style.animation = 'none'; void el.offsetWidth; el.style.animation = '';
+    });
+  }
+  function apply(lang, animate) {
+    if (!I18N[lang]) lang = 'en';
+    var changed = lang !== LANG;
+    LANG = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+    if (animate && changed) replay();
+  }
+  function choose(lang) {
+    apply(lang, true);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    try { history.replaceState(null, '', '#' + lang); } catch (e) {}
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { choose(b.dataset.lang); });
+  });
+  window.addEventListener('hashchange', function () {
+    var h = location.hash.slice(1).toLowerCase();
+    if (I18N[h]) apply(h, true);
+  });
+  apply(pick(), false);
+})();
+
+/* ---------- Copy buttons ---------- */
+(function () {
+  function flash(btn, key) {
+    btn.textContent = t(key);
+    btn.classList.add('done');
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function () { btn.textContent = t(btn.dataset.i18n); btn.classList.remove('done'); }, 1600);
+  }
+  function select(el) {
+    if (!el) return;
+    var r = document.createRange(); r.selectNodeContents(el);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  function copy(text, btn, fallbackEl) {
+    try {
+      navigator.clipboard.writeText(text).then(
+        function () { flash(btn, 'copied'); },
+        function () { select(fallbackEl); flash(btn, 'selected'); }
+      );
+    } catch (e) { select(fallbackEl); flash(btn, 'selected'); }
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.dataset.copy);
+      copy(el.textContent.trim(), btn, el);
+    });
+  });
+  var share = document.getElementById('share-page');
+  share.addEventListener('click', function () { copy(location.href.split('#')[0] + '#' + LANG, share, null); });
+})();
+</script>
+</body>
+</html>
